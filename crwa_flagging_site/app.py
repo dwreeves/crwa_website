@@ -2,12 +2,12 @@
 This file handles the construction of the Flask application object.
 """
 import os
+from typing import ClassVar
 from flask import Flask
+from .config import ProductionConfig
 
-from .config import ConfigType, ProductionConfig
 
-
-def create_app(config: ConfigType = None) -> Flask:
+def create_app(config: ClassVar = None) -> Flask:
     """Create and configure an instance of the Flask application.
 
     Args:
@@ -32,3 +32,9 @@ def create_app(config: ConfigType = None) -> Flask:
 
     # And we're all set! We can hand the app over to flask at this point.
     return app
+
+
+if __name__ == '__main__':
+    from .config import TestingConfig
+    app = create_app(config=TestingConfig)
+    app.run()

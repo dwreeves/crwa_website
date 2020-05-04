@@ -8,7 +8,7 @@ ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 KEYS_FILE = os.path.join(ROOT_DIR, 'keys.yml')
 
 @dataclass
-class ConfigType:
+class BaseConfig:
     DEBUG: bool = False
     TESTING: bool = False
     CSRF_ENABLED: bool = True
@@ -16,19 +16,19 @@ class ConfigType:
     DATABASE: str = None
 
 
-class ProductionConfig(ConfigType):
+class ProductionConfig(BaseConfig):
     DEBUG: bool = False
 
 
-class StagingConfig(ConfigType):
+class StagingConfig(BaseConfig):
     DEVELOPMENT: bool = True
     DEBUG: bool = True
 
 
-class DevelopmentConfig(ConfigType):
+class DevelopmentConfig(BaseConfig):
     DEVELOPMENT: bool = True
     DEBUG: bool = True
 
 
-class TestingConfig(ConfigType):
+class TestingConfig(BaseConfig):
     TESTING: bool = True
